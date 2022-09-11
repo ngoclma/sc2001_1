@@ -1,4 +1,7 @@
 #include <iostream>
+#include <chrono>
+using namespace std::chrono;
+
 
 void insertSort(int arr[],int arrSize);
 void mergeSort(int arr[], int firstIndex,int lastIndex);
@@ -8,17 +11,38 @@ void printArray(int arr[],int arrSize);
 
 int main() {
     //test arr
-    int arr[] = {12, 31, 25, 8, 32, 17, 40, 42};
-    //get size of array
+  int arr[] = {12, 31, 25, 8, 32, 17, 40, 42};
+  /*int arr2[] = {12, 31, 25, 8, 32, 17, 40, 42};
+
+  //////////////////////INSERT SORT//////////////////
+    //get size of array */
     int arrSize = sizeof(arr)/sizeof(arr[0]);
-    //call inserSort function
+  
+    //Start timing
+  //auto start = high_resolution_clock::now();
+  //call inserSort function
     insertSort(arr,arrSize);
-   // mergeSort(arr,0,arrSize-1);
+  
+  /*auto stop = high_resolution_clock::now();
+  End timing, measure the duration
+  auto duration = duration_cast<microseconds>(stop - start);
+  printf("InsertSort took %f Seconds!\n",duration.count());
+
+   
+  
+
+ //////////////////////MERGE SORT////////////////////
+
+  mergeSort(arr2,0,arrSize-1);*/
+
+  
     printArray(arr,arrSize);
+  
     return 0;
 }
 
 void printArray(int arr[],int arrSize){
+    printf("Array Order: ");
     for(int i = 0 ; i< arrSize ; i++){
         printf("%d ",arr[i]);
     }
