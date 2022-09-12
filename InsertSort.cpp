@@ -1,5 +1,8 @@
 #include <iostream>
 #include <chrono>
+#include <stdlib.h>
+#include <stdio.h>
+
 using namespace std::chrono;
 
 
@@ -22,7 +25,26 @@ int main() {
   //auto start = high_resolution_clock::now();
   //call inserSort function
     insertSort(arr,arrSize);
-  
+  /* 
+  //First generate an array of 1000 random integers
+  // Subsequently every loop overwrite the array with +1 size 
+  // and regenerate random numbers
+ 
+    long start;
+    long end = 10000000;
+
+    for(start=1000; start < end; start++)
+     {
+      int a[start];
+      for(int j=0;j<start;j++)
+        {
+          a[j] = rand()%1000;
+        }
+
+      //pass to methods to sort
+     }
+    */
+    
   /*auto stop = high_resolution_clock::now();
   End timing, measure the duration
   auto duration = duration_cast<microseconds>(stop - start);
