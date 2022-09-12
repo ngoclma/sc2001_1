@@ -41,73 +41,45 @@ void insertSort(int arr[], int arrSize, int firstIndex, int lastIndex)
 }
 
 // Merge Sort
-int mergeSort(int arr[], int arrSize, int firstIndex, int lastIndex)
-{
-    int count = 1, count1, count2;
-    int mid = (firstIndex + lastIndex) / 2;
-    if (lastIndex - firstIndex <= 0)
-    {
-        return 0;
-    }
-    else /*if(lastIndex - firstIndex > 1)*/
-    {
-        count1 = mergeSort(arr, firstIndex, mid);
-        count2 = mergeSort(arr, mid + 1, lastIndex);
-    }
-    merge(arr, firstIndex, lastIndex);
-
-    count = count1 + count2;
-    return count;
+void mergesort(int arr[], int l, int r) {
+  int mid = (l + r) / 2;
+  if (r - l <= 0) {
+    return;
+  }                     // one or zero elements
+  else if (r - l > 1) { // array can be split further
+    mergesort(arr, l, mid);
+    mergesort(arr, mid + 1, r);
+  }
+  merge(arr, l, r);
 }
-
-void merge(int arr[], int arrSize, int firstIndex, int lastIndex)
-{
-    int mid = (firstIndex + lastIndex) / 2;
-    int i, j;
-    // creating temp array
-    int leftSize = mid - firstIndex + 1;
-    int rightSize = lastIndex - mid;
-
-    int leftArr[leftSize];
-    int rightArr[rightSize];
-    // populating array
-    for (i = 0; i < leftSize; i++)
-    {
-        leftArr[i] = arr[i + firstIndex];
+void merge(int arr[], int l, int r) {
+  int mid = (l + r) / 2;
+  int a = l, b = mid + 1, i,
+      temp; // a and b are the first index of the subarrays
+  if (r <= l) {
+    return;
+  }
+  while (a <= mid && b <= r) {
+    if (arr[a] > arr[b]) {
+      temp = arr[b++];
+      for (i = ++mid; i > a; i--) {
+        arr[i] = arr[i - 1];
+      }
+      arr[a++] = temp;
+    } else if (arr[a] < arr[b]) {
+      a++;
+    } else {
+      if (a == mid && b == r) {
+        break;
+      }
+      temp = arr[b++];
+      a++;
+      for (i = ++mid; i > a; i--) {
+        arr[i] = arr[i - 1];
+      }
+      arr[a++] = temp;
     }
-    for (j = 0; j < rightSize; j++)
-    {
-        rightArr[j] = arr[j + mid + 1];
-    }
-    i = 0, j = 0;
-    int x = firstIndex;
-    while (i < leftSize && j < rightSize)
-    {
-        if (leftArr[i] <= rightArr[j])
-        {
-            arr[x] = leftArr[i];
-            i++;
-        }
-        else
-        {
-            arr[x] = rightArr[j];
-            j++;
-        }
-        x++;
-    }
-    // this is after either one of the subarr ends, we populate the remaining sorted array
-    while (i < leftSize)
-    {
-        arr[x] = leftArr[i];
-        i++;
-        x++;
-    }
-    while (i < leftSize)
-    {
-        arr[x] = rightArr[j];
-        j++;
-        x++;
-    }
+  }
 }
 
 // MergeInsert Sort
