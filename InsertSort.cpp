@@ -25,7 +25,7 @@ int main() {
   //auto start = high_resolution_clock::now();
   //call inserSort function
     insertSort(arr,arrSize);
-  /* 
+   
   //First generate an array of 1000 random integers
   // Subsequently every loop overwrite the array with +1 size 
   // and regenerate random numbers
@@ -43,7 +43,7 @@ int main() {
 
       //pass to methods to sort
      }
-    */
+  
     
   /*auto stop = high_resolution_clock::now();
   End timing, measure the duration
