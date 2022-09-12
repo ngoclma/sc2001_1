@@ -157,20 +157,20 @@ int main()
 {
     // PLOTTING - vary array length (will count the number of key comparisons for plotting)
     long start = 1000;
-    long end = 10001;
-    int keyCompare[1e6];
-
+    long end = 1100;
+    int keyCompare[100];
+    int count=0;
     for (int n = start; n < end; n++)
     {
         // Generate random array of size n
         int a[n];
-        for (int j = 0; j < start; j++)
+        for (int j = 0; j < n; j++)
             a[j] = rand() % 1000;
 
         // --SORT--
         // TIMING - start
         // auto start = high_resolution_clock::now();
-        keyCompare[n - start] = mergeInsertSort(a, n, 0, n - 1);
+        keyCompare[count++] = mergeSort(a, n, 0, n - 1);
         // TIMING - end
         // auto stop = high_resolution_clock::now();
         // End timing, measure the duration
@@ -178,11 +178,11 @@ int main()
         // printf("InsertSort took %f Seconds!\n",duration.count());
 
         // Print & Check
-        printArray(arr, arrSize);
+        //printArray(arr, arrSize);
     }
 
-    for (int i = start; i < end; i++)
-        print("%d,", keyCompare[i - start]);
+    for (int i = 0; i < 100; i++)
+        print("%d,", keyCompare[i]);
 
     return 0;
 }
