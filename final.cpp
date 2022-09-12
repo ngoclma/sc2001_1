@@ -8,17 +8,19 @@ using namespace std::chrono;
 // Declare S
 int S = 10;
 
-void insertSort(int arr[], int arrSize);
-void mergeSort(int arr[], int arrSize, int firstIndex, int lastIndex);
-int mergeInsertSort(int arr[], int arrSize, int firstIndex, int lastIndex) void merge(int arr[], int arrSize, int firstIndex, int lastIndex);
+// The return types of sort methods are interger to save the number of key comparison
+int insertSort(int arr[], int arrSize, int firstIndex, int lastIndex);
+int mergeSort(int arr[], int arrSize, int firstIndex, int lastIndex);
+int mergeInsertSort(int arr[], int arrSize, int firstIndex, int lastIndex);
+void merge(int arr[], int arrSize, int firstIndex, int lastIndex);
 void printArray(int arr[], int arrSize);
 
 // Insertion Sort
-void insertSort(int arr[], int arrSize)
+void insertSort(int arr[], int arrSize, int firstIndex, int lastIndex)
 {
-    int i, j;
-    int temp;
-    for (int i = 1; i < arrSize; i++)
+    int i, j, temp;
+    int count = 0;
+    for (int i = firstIndex; i < lastIndex; i++)
     {
         for (int j = i; j > 0; j--)
         {
@@ -27,6 +29,7 @@ void insertSort(int arr[], int arrSize)
                 temp = arr[j];
                 arr[j] = arr[j - 1];
                 arr[j - 1] = temp;
+                count++;
             }
             else
             {
@@ -34,25 +37,30 @@ void insertSort(int arr[], int arrSize)
             }
         }
     }
+    return count;
 }
 
 // Merge Sort
-void mergeSort(int arr[], int firstIndex, int lastIndex)
+int mergeSort(int arr[], int arrSize, int firstIndex, int lastIndex)
 {
+    int count = 1, count1, count2;
     int mid = (firstIndex + lastIndex) / 2;
     if (lastIndex - firstIndex <= 0)
     {
-        return;
+        return 0;
     }
     else /*if(lastIndex - firstIndex > 1)*/
     {
-        mergeSort(arr, firstIndex, mid);
-        mergeSort(arr, mid + 1, lastIndex);
+        count1 = mergeSort(arr, firstIndex, mid);
+        count2 = mergeSort(arr, mid + 1, lastIndex);
     }
     merge(arr, firstIndex, lastIndex);
+
+    count = count1 + count2;
+    return count;
 }
 
-void merge(int arr[], int firstIndex, int lastIndex)
+void merge(int arr[], int arrSize, int firstIndex, int lastIndex)
 {
     int mid = (firstIndex + lastIndex) / 2;
     int i, j;
@@ -103,6 +111,31 @@ void merge(int arr[], int firstIndex, int lastIndex)
 }
 
 // MergeInsert Sort
+void mergeInsertSort(int arr[], int arrSize, int firstIndex, int lastIndex)
+{
+    int count = 1, count1, count2;
+    int mid = (firstIndex + lastIndex) / 2;
+    if (lastIndex - firstIndex <= 0)
+    {
+        return 0;
+    }
+    // Use merge sort if size of each sub-array is larger than S
+    else if (lastIndex - firstIndex > 2 * S)
+    {
+        count1 = mergeSort(arr, arrSize, firstIndex, mid);
+        count2 = mergeSort(arr, arrSize, mid + 1, lastIndex);
+    }
+    // Use insertion sort if size of each sub-array is equal or smaller than S
+    else
+    {
+        count1 = insertSort(arr, arrSize, firstIndex, mid);
+        count2 = insertSort(arr, arrSize, mid + 1, lastIndex);
+    }
+    merge(arr, firstIndex, lastIndex);
+
+    count = count1 + count2;
+    return count;
+}
 
 // Print & Check
 void printArray(int arr[], int arrSize)
