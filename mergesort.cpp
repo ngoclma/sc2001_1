@@ -1,9 +1,8 @@
 #include <iostream>
 
-void merge(int arr[], int l, int r) {
+void merge(int arr[], int l, int r, int *count){
   int mid = (l + r) / 2;
-  int a = l, b = mid + 1, i,
-      temp; // a and b are the first index of the subarrays
+  int a = l, b = mid + 1, i, temp;
   if (r <= l) {
     return;
   }
@@ -27,29 +26,36 @@ void merge(int arr[], int l, int r) {
       }
       arr[a++] = temp;
     }
+    (*count)++;
   }
 }
 
-void mergesort(int arr[], int l, int r) {
+void mergesorthelper(int arr[], int l, int r, int *count) {
   int mid = (l + r) / 2;
   if (r - l <= 0) {
     return;
   }                     // one or zero elements
   else if (r - l > 1) { // array can be split further
-    mergesort(arr, l, mid);
-    mergesort(arr, mid + 1, r);
+    mergesorthelper(arr, l, mid, count);
+    mergesorthelper(arr, mid + 1, r, count);
   }
-  merge(arr, l, r);
+  merge(arr, l, r, count);
+}
+
+int mergesort(int arr[], int l, int r) {
+  int count=0;
+  mergesorthelper(arr, l, r, &count);
+  return count;
 }
 
 int main() {
   // test arr
-  int arr[] = {12, 31, 25, 8, 32, 17, 40, 42};
-
-  mergesort(arr, 0, 7);
+  int arr[] = {5,4,3,2,1};
+  int cnt = mergesort(arr, 0, 4);
 
   for (int i = 0; i < 8; i++) {
     std::cout << arr[i] << ' ';
   }
+  std::cout << '\n' << cnt;
   return 0;
 }
