@@ -1,5 +1,5 @@
 # SC2001_Example Class 1
-#Implementing Hybrid Sort: A mix of Mergesort and Insert Sort
+# Implementing Hybrid Sort: A mix of Mergesort and Insert Sort
 
 > Contributors: Rishabh_Alex, Kit Ye, Ngoc, Jia Wei
 
