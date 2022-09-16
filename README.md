@@ -1,4 +1,4 @@
-# SC2001_Example Class 1
+# SC2001_Example Class 1, Team 8
 # Implementing Hybrid Sort: A mix of Mergesort and Insert Sort
 
 > Contributors: Rishabh_Alex, Kit Ye, Ngoc, Jia Wei
@@ -11,5 +11,15 @@ Once the size of a subarray in a recursive call of Mergesort is less than or equ
 the algorithm will switch to Insertion Sort, which is efficient for small-sized input.
 
 
+## To navigate our repository, we have included a brief explaination of the important files.
 
-Please just upload anything you have, then we will combine it in the final file
+> InsertSort.cpp: Our initial implementation of InsertSort and not-in-place MergeSort.
+
+
+> mergesort.cpp: Our initial implementataion of in-place MergeSort.
+
+
+> final.cpp: Our attempt at integrating MergeSort and InsertionSort, with the generation of random elements in arrays of variable lengths.
+
+
+
