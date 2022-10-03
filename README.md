@@ -1,5 +1,6 @@
-# SC2001_Example Class 1, Team 8
-# Implementing Hybrid Sort: A mix of Mergesort and Insert Sort
+# SC2001_Team 8
+
+# Example Class 1: Implementing Hybrid Sort - A mix of Mergesort and Insert Sort
 
 > Contributors: Rishabh_Alex, Kit Ye, Ngoc, Jia Wei
 
