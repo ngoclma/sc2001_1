@@ -11,6 +11,8 @@ Therefore, in real use, we often combine Mergesort with Insertion Sort to come u
 Once the size of a subarray in a recursive call of Mergesort is less than or equal to S,
 the algorithm will switch to Insertion Sort, which is efficient for small-sized input.
 
+Presentation link: https://docs.google.com/presentation/d/1j8u_ie7UYgj7jgVX7oDw5L-rRS6GCL2t3fBm_k2BEus/edit?usp=sharing
+
 
 ## To navigate our repository, we have included a brief explaination of the important files.
 
