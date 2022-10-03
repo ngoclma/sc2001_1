@@ -44,7 +44,7 @@ class Graph(object):
     # ==============================DIJKSTRA ALGORITHM DEFINITIONS=======================================
     # WITHIN GRAPH CLASS
 
-    def dijkstra_shortest_path(self, start = 0, print = True):
+    def dijkstra_array_matrix(self, start = 0, print = True):
         start_time = time.perf_counter()
         dist = [float('inf')] * (self.V)
         pi = [None] * (self.V)
@@ -84,10 +84,9 @@ class Graph(object):
     
     
     def printSolution(self, dist):
-        print("----------------------------------------------------------")
-        print(f"Matrix implementation of graph, with {self.V} vertices and {self.edge} edges")
+        print(f"{self.V} vertices and {self.edge} edges")
         print ("|Vertex\t\t\t\t|Distance from Source\t\t\t\t|Previous node")
-        for node in range(1, self.V+1):
+        for node in range(1, self.V):
             print(f"|{node}\t\t\t\t|{dist[node]}\t\t\t\t|{self.pi[node]}")
         print("----------------------------------------------------------")
             
