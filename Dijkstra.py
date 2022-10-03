@@ -45,14 +45,72 @@ class Graph(object):
     # ==============================DIJKSTRA ALGORITHM DEFINITIONS=======================================
     # WITHIN GRAPH CLASS
 
-    def dijkstra_algo(self,graph,start_node):
-        for v in graph:
-            d[v] = 1e7
-            pi = [False]
+    def dijkstra_shortest_path(self, start = 0, print = True):
+        start_time = time.perf_counter()
+        dist = [float('inf')] * (self.V)
+        pi = [None] * (self.V)
+        Set = [False] * (self.V) 
+        
+        dist[start] = 0
+        pq = array_pq()
+
+        # put everything into a pq 
+        for i in range(self.V):
+            pq.add_object(i, self.graph[i][0])    
+
+        while not pq.is_empty():
+            current_tuple = pq.array[0]
+            pq.del_object(pq.array[0][0])        
+            u = current_tuple[0]
+            Set[u] = True 
+            
+
+            for neighbour in range(self.V):
+                # If it is a neighbour
+                # and not yet visited 
+                if (self.graph[u][neighbour] > 0 and Set[neighbour] == False and dist[neighbour] > dist[u] + self.graph[u][neighbour]):
+                    pq.del_object(neighbour)
+                    dist[neighbour] = dist[u] + self.graph[u][neighbour]
+                    pi[neighbour] = u
+                    pq.add_object(neighbour, dist[neighbour])
+                
+
+        end = time.perf_counter()
+        time_taken = end - start_time
+        self.pi = pi
+        if print:
+            self.printSolution(dist)
+
+        return dist, time_taken
+            
+   
         
  
         
 # ==============================PRIORITY QUEUE DEFINITIONS=======================================
+
+# array priority queue
+class array_pq():
+    def __init__(self):
+        self.array = []
+    
+    def add_object(self, item, priority):
+        temp_tuple = (item, priority)
+        self.array.append(temp_tuple)
+        self.array.sort(key = lambda x: x[1])
+
+    def del_object(self, item):
+        index = 0
+        for i in self.array:
+            if (i[0] == item):
+                self.array.pop(index)
+                return
+            index += 1
+    
+    def is_empty(self):
+        return not bool(len(self.array))
+
+# adjacency list priority queue
 class PriorityQueue(object):
     def __init__(self):
         self.queue = []
