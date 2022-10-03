@@ -1,5 +1,6 @@
 from heapq import heapify
 import random
+import time
 from queue import PriorityQueue as pq
 
 # ============================== ADJACENCY MATRIX DEFINITIONS=======================================
@@ -15,13 +16,11 @@ class Graph(object):
             self.adjMatrix.append([0 for i in range(size)])
             
             
-    def add_edge(self,v1,v2):
-        if v1 == v2:
-            return
-        
-        self.adjMatrix[v1][v2] = 1
-        self.adjMatrix[v2][v1] = 1
+    def add_edge(self,v1,v2, dist):  
+        self.adjMatrix[v1][v2] = dist
+        self.adjMatrix[v2][v1] = dist
         self.EdgeCount += 1 
+
         
     def remove_edge(self,v1,v2):
         if (self.adjMatrix[v1][v2] == 0):
@@ -82,6 +81,15 @@ class Graph(object):
             self.printSolution(dist)
 
         return dist, time_taken
+    
+    
+    def printSolution(self, dist):
+        print("----------------------------------------------------------")
+        print(f"Matrix implementation of graph, with {self.V} vertices and {self.edge} edges")
+        print ("|Vertex\t\t\t\t|Distance from Source\t\t\t\t|Previous node")
+        for node in range(1, self.V+1):
+            print(f"|{node}\t\t\t\t|{dist[node]}\t\t\t\t|{self.pi[node]}")
+        print("----------------------------------------------------------")
             
    
         
