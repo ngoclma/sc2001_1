@@ -11,23 +11,30 @@ class Graph(object):
         self.EdgeCount = 0
         self.pi = []
         self.edge = 0
+        self.visited = []
         
         for i in range(size):
             self.adjMatrix.append([0 for i in range(size)])
             
             
-    def add_edge(self,v1,v2, dist):  
-        self.adjMatrix[v1][v2] = dist
-        self.adjMatrix[v2][v1] = dist
-        self.EdgeCount += 1 
+    def add_edge(self,v1,v2, dist):
+        
+        if(self.visited[v2] != 1): # if vertex v2 is not visited
+            self.adjMatrix[v1][v2] = dist
+            self.visited[v1] = 1
+            self.visited[v2] = 1
+            self.EdgeCount += 1
+        
+       else:
+            print(f"already visited v1 (f{v1}) and v2 (f{v2})")
+        
 
         
     def remove_edge(self,v1,v2):
-        if (self.adjMatrix[v1][v2] == 0):
+        if (self.adjMatrix[v1][v2] == 0 || (self.visited[v1] == 0 && self.visited[v2] == 0)):
             print(f"no edge between v1 (f{v1}) and v2 (f{v2})")
             return
         self.adjMatrix[v1][v2] = 0
-        self.adjMatrix[v2][v1] = 0
         self.EdgeCount -= 1
         
     def edge_count(self):
